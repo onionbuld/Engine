@@ -62,19 +62,18 @@
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
-
+	// render() The method does not contain any code
 	void Window::render() {
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		
+		/*
 		glBegin(GL_QUADS);
 		glVertex2d(0.5f, 0.5f);
 		glVertex2d(0.5f, -0.5f);
 		glVertex2d(-0.5f, -0.5f);
 		glVertex2d(-0.5f, 0.5f);
 		glEnd();
-		
-	
+		*/
 	}
 
 	 void resize_callback(GLFWwindow* window, int width, int height) {

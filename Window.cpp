@@ -49,7 +49,7 @@
 
 	void Window::mainLoop() {
 		clear();
-		render();
+		//render();
 		update();
 	}
 

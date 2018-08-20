@@ -18,8 +18,10 @@ class Window {
 		GLFWwindow* window;
 	
 		bool init();
+public:
 		void update();
 		void clear();
+private:
 		void render();
 
 		friend void resize_callback(GLFWwindow* window, int width, int height);

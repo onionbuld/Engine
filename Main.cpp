@@ -8,6 +8,49 @@ const int WIDTH = 800, HEIGHT = 600;
 // ----------------------------------------------------------------------------
 // vertices
 // ----------------------------------------------------------------------------
+float Vertices[] = {
+	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, -1.0f,
+	0.5f, -0.5f, -0.5f,		0.0f, 0.0f, -1.0f,
+	0.5f, 0.5f, -0.5f,		0.0f, 0.0f, -1.0f,
+	0.5f, 0.5f, -0.5f,		0.0f, 0.0f, -1.0f,
+	-0.5f, 0.5f, -0.5f,		0.0f, 0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, -1.0f,
+	
+	-0.5f, -0.5f, 0.5f,		0.0f, 0.0f, 1.0f,
+	0.5f, -0.5f, 0.5f,		0.0f, 0.0f, 1.0f,
+	0.5f, 0.5f, 0.5f,		0.0f, 0.0f, 1.0f,
+	0.5f, 0.5f, 0.5f,		0.0f, 0.0f, 1.0f,
+	-0.5f, 0.5f, 0.5f,		0.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f, 0.5f,		0.0f, 0.0f, 1.0f,
+	
+	-0.5f, 0.5f, 0.5f,		-1.0f, 0.0f, 0.0f,
+	-0.5f, 0.5f, -0.5f,		-1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,	-1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,	-1.0f, 0.0f, 0.0f,
+	-0.5f, -0.5f, 0.5f,		-1.0f, 0.0f, 0.0f,
+	-0.5f, 0.5f, 0.5f,		-1.0f, 0.0f, 0.0f,
+	
+	0.5f, 0.5f, 0.5f,		1.0f, 0.0f, 0.0f,
+	0.5f, 0.5f, -0.5f,		1.0f, 0.0f, 0.0f,
+	0.5f, -0.5f, -0.5f,		1.0f, 0.0f, 0.0f,
+	0.5f, -0.5f, -0.5f,		1.0f, 0.0f, 0.0f,
+	0.5f, -0.5f, 0.5f,		1.0f, 0.0f, 0.0f,
+	0.5f, 0.5f, 0.5f,		1.0f, 0.0f, 0.0f,
+	
+	-0.5f, -0.5f, -0.5f,	0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f, -0.5f,		0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f, 0.5f,		0.0f, -1.0f, 0.0f,
+	0.5f, -0.5f, 0.5f,		0.0f, -1.0f, 0.0f,
+	-0.5f, -0.5f, 0.5f,		0.0f, -1.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,	0.0f, -1.0f, 0.0f,
+	
+	-0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f, 0.5f,		0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f, 0.5f,		0.0f, 1.0f, 0.0f,
+	-0.5f, 0.5f, 0.5f,		0.0f, 1.0f, 0.0f,
+	-0.5f, 0.5f, -0.5f,		0.0f, 1.0f, 0.0f
+};
 float cubeVertices[] = {
 	// positions          // texture Coords
 	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -69,8 +112,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void MoveCamera(GLFWwindow* window);
 
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
-glm::vec3 ObjectColor(1.0f, 0.5f, 0.31f);
-glm::vec3 LightColor(1.0f, 0.5f, 1.0f);
+glm::vec3 LightColor(1.0f, 1.0f, 1.0f);
 
 int main()
 {
@@ -102,10 +144,10 @@ int main()
 	glGenBuffers(1, &cubeVBO);
 	glBindVertexArray(cubeVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), &Vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 	
@@ -113,8 +155,8 @@ int main()
 	glGenVertexArrays(1, &cube_light_VAO);
 	glBindVertexArray(cube_light_VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), &Vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 	
@@ -142,8 +184,18 @@ int main()
 		window.clear();
 		// 1
 		shader_light.enable();
-		shader_light.setVec3("ObjectColor", ObjectColor);
-		shader_light.setVec3("LightColor", LightColor);
+		// Light 
+		shader_light.setVec3("light.position", lightPos);
+		shader_light.setVec3("light.ambient", 0.6f, 0.6f, 0.6f);
+		shader_light.setVec3("light.diffuse", 0.8f, 0.8f, 0.8f);
+		shader_light.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		// bronze				
+		shader_light.setVec3("material.ambient", 0.2125f, 0.1275f, 0.054f);
+		shader_light.setVec3("material.diffuse", 0.714f, 0.4284f, 0.18144f);
+		shader_light.setVec3("material.specular", 0.393548f, 0.271906f, 0.166721f);
+		shader_light.setFloat("material.shininess", 32.0f);
+
+		shader_light.setVec3("viewPos", cameraPos.x, cameraPos.y, cameraPos.z);
 		
 		shader_light.setMat4("view", view);
 		shader_light.setMat4("projection", projection);
@@ -220,13 +272,3 @@ void MoveCamera(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 }
-
-/*
-window.clear();
-view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-//shader.setMat4("view", view);							// v. 1.0
-glBindVertexArray(cubeVAO);
-glDrawArrays(GL_TRIANGLES, 0, 36);
-glBindVertexArray(0);
-window.update();
-*/
